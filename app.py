@@ -12,8 +12,22 @@ from pymongo import MongoClient
 
 app = Flask(__name__)  # initialising the flask app with the name 'app'
 
-
 # geting and sending response to dialogflow
+'''
+@app.route('/')
+def hello_world():
+    return "Hello WOrld"'''
+'''
+@app.route('/webhook', methods=['POST'])
+@cross_origin()
+def webhook():
+    req = request.get_json(silent=True, force=True)
+    print(req)
+    return {
+        'fulfillmentText':'Hello From the Other Side.'
+    }
+'''
+#'''
 @app.route('/webhook', methods=['POST'])
 @cross_origin()
 def webhook():
@@ -246,14 +260,14 @@ def prepareEmail(contact_list):
     mailclient = EMailClient.GMailClient()
     mailclient.sendEmail(contact_list)
 
-
-'''
+#'''
+#'''
 if __name__ == '__main__':
     port = int(os.getenv("PORT"))
     print("Starting app on port %d" % port)
     app.run(debug=False, port=port, host='0.0.0.0')
-    '''
+'''
 if __name__ == "__main__":
     app.run(port=8000, debug=True)
-    #'''
+    '''
     # running the app on the local machine on port 8000
